@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Cliente, Producto
 
 # Create your views here.
+# templates
 
 def ventas_view(request):
     num_ventas = 156
