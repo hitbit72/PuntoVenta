@@ -6,7 +6,7 @@ from django.db import models
 # predeterminado "id" proporcionado por django
 
 class Cliente(models.Model):
-    #id = models.AutoField(primary_key=True)
+    #id = models.AutoField(primary_key=True)  # DJango lo crea por defecto
     codigo = models.CharField(max_length=50, unique=True, null=True, blank=True)
     nombre = models.CharField(max_length=200, unique=True, null=False, blank=False)
     telefono = models.CharField(max_length=20, unique=False, null=True, blank=True)
