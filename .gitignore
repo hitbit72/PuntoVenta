@@ -5,3 +5,4 @@ __pycache__/
 notas.txt
 start.bat
 static/
+*.zip
