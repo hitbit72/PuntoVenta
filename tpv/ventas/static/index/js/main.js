@@ -104,11 +104,11 @@ function editarPersonal(id, nombre, telefono, cargo) {
   document.getElementById("cargo_editar").value = cargo;
 }
 
-function editarCliente(id, nombre, telefono, cargo) {
-  document.getElementById("id_cliente_editar").value = id;
-  document.getElementById("nombre_editar").value = nombre;
-  document.getElementById("telefono_editar").value = telefono;
-  document.getElementById("cargo_editar").value = cargo;
+function editarCliente(id, codigo, nombre, telefono) {
+  document.getElementById("id_cliente_edit").value = id;
+  document.getElementById("codigo_edit").value = codigo;
+  document.getElementById("nombre_edit").value = nombre;
+  document.getElementById("telefono_edit").value = telefono;
 }
 
 function eliminarPersonal(id) {

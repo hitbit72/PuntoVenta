@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Producto
-from .forms import AddClienteForm
+from .forms import AddClienteForm, EditClienteForm
 from django.contrib import messages
 #from pyexpat.errors import messages
 import time
@@ -15,13 +15,15 @@ def ventas_view(request):
     }
     return render(request, 'ventas.html', context)
 
-
+# visualizacion principal clientes
 def clientes_view(request):
     clientes = Cliente.objects.all()
-    form_personal = AddClienteForm
+    form_cliente = AddClienteForm()
+    form_editar = EditClienteForm()
     context = {
         'clientes': clientes,
-        'form_personal': form_personal,
+        'form_cliente': form_cliente,
+        'form_editar': form_editar,
         'time': time.time(),
     }
     return render(request, 'clientes.html', context)
@@ -34,8 +36,7 @@ def add_cliente_view(request):
             try:
                 form.save(commit=True)
                 #messages.add_message(request, messages.INFO, 'Formulario guardado correctamente')
-                #messages.success(request,'Formulario guardado correctamente')
-                messages.add_message(request,messages.SUCCESS,'Formulario guardado correctamente')
+                messages.success(request,'Formulario guardado correctamente')
             except:
                 messages.warning(request, 'No se guardo el formulario')
                 print(form.errors)
@@ -46,8 +47,23 @@ def add_cliente_view(request):
             messages.error(request, 'Formulario no válido')
     return redirect('Clientes')
 
+
 def edit_cliente_view(request):
+    #print('Editar cliente')
+    if request.POST:
+        cliente = Cliente.objects.get(pk=request.POST.get('id_cliente_edit'))
+        form = EditClienteForm(request.POST, request.FILES, instance=cliente)
+        if form.is_valid:
+            try:
+                form.save(commit=True)
+                messages.success(request,'Formulario guardado correctamente')
+            except:
+                messages.warning(request, 'No se guardo el formulario')
+        else:
+            print(form.errors)
+            messages.error(request, 'Formulario no válido')
     return redirect('Clientes')
+
 
 def delete_cliente_view(request):
     if  request.POST:
