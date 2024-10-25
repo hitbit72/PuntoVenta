@@ -51,6 +51,7 @@ def add_cliente_view(request):
 def edit_cliente_view(request):
     #print('Editar cliente')
     if request.POST:
+        # id del registro a editar, en form añadir instance=cliente
         cliente = Cliente.objects.get(pk=request.POST.get('id_cliente_edit'))
         form = EditClienteForm(request.POST, request.FILES, instance=cliente)
         if form.is_valid:
