@@ -35,7 +35,6 @@ def add_cliente_view(request):
                 form.save(commit=True)
                 #messages.add_message(request, messages.INFO, 'Formulario guardado correctamente')
                 #messages.success(request,'Formulario guardado correctamente')
-                #messages.success(request,'Formulario guardado correctamente')
                 messages.add_message(request,messages.SUCCESS,'Formulario guardado correctamente')
             except:
                 messages.warning(request, 'No se guardo el formulario')
