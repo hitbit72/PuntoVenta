@@ -5,3 +5,6 @@ __pycache__/
 notas.txt
 start.bat
 *.zip
+static/
+!static/index/js/main.js
+!static/index/js/idiom.json
