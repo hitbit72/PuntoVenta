@@ -30,6 +30,9 @@
   <link rel="stylesheet" type="text/css"
     href="{% static 'index/DataTables/Buttons-2.0.1/css/buttons.dataTables.min.css' %}">
 
+  <script type="text/javascript">
+    const start = Date.now();
+  </script>
   <script type="text/javascript" charset="utf8" src="{% static 'index/js/jquery.js' %}"></script>
   <link rel="stylesheet" href="{% static 'jquery-ui/jquery-ui.min.css' %}">
   <script src="{% static 'jquery-ui/jquery-ui.min.js' %}"></script>
@@ -230,7 +233,9 @@
   <script src="{% static 'index/DataTables/Buttons-2.0.1/js/buttons.print.min.js' %}"></script>
   <script src="{% static 'index/DataTables/Buttons-2.0.1/js/buttons.html5.min.js' %}"></script>
   <script src="{% static 'index/DataTables/Buttons-2.0.1/js/pdfmaker.min.js' %}"></script>
+  {% block mainjs %}
   <script type="text/javascript" charset="utf8" src="{% static 'index/js/main.js' %}"></script>
+  {% endblock %}
 </body>
 
 </html>

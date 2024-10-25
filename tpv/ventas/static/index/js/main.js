@@ -3,6 +3,9 @@
     alert('Todo bien');
   });*/
 
+function hiddenObj(id) {
+  document.getElementById(id).style.visibility = 'hidden';      // Hide
+}
 
 function eliminarEquipo(id) {
   document.getElementById("id_equipo_eliminar").value = id;
@@ -101,8 +104,21 @@ function editarPersonal(id, nombre, telefono, cargo) {
   document.getElementById("cargo_editar").value = cargo;
 }
 
+function editarCliente(id, nombre, telefono, cargo) {
+  document.getElementById("id_cliente_editar").value = id;
+  document.getElementById("nombre_editar").value = nombre;
+  document.getElementById("telefono_editar").value = telefono;
+  document.getElementById("cargo_editar").value = cargo;
+}
+
 function eliminarPersonal(id) {
   document.getElementById("id_personal_eliminar").value = id;
+  //alert("EliminarPersonal: "+document.getElementById("id_personal_eliminar").value)
+}
+
+function eliminarCliente(id) {
+  document.getElementById("id_cliente_eliminar").value = id;
+  //alert("Eliminar cliente: "+document.getElementById("id_cliente_eliminar").value);
 }
 
 function borrarContent(){

@@ -9,7 +9,8 @@
 <script src="{% static 'index/js/b4.js' %}"></script>
 
 
-<div id="AgregarPersonalModal" class="modal" style="overflow: scroll;">
+
+<div id="AgregarClienteModal" class="modal" style="overflow: scroll;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info">
@@ -41,7 +42,7 @@
     </div>
 </div>
 
-<div id="EditarPersonalModal" class="modal">
+<div id="EditarClienteModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info">
@@ -74,7 +75,7 @@
     </div>
 </div>
 
-<div id="EliminarPersonalModal" class="modal">
+<div id="EliminarClienteModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-info">
@@ -83,7 +84,7 @@
             <div class="modal-body bg-dark text-white">
                 <p class="labelmodal">¿Estás seguro?</p>
                 <form method="POST" action="{% url 'DeleteCliente' %}">{% csrf_token %}
-                    <input type="hidden" id="id_personal_eliminar" name="id_personal_eliminar">
+                    <input type="hidden" id="id_cliente_eliminar" name="id_cliente_eliminar">
             </div>
             <div class="modal-footer bg-dark text-white">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -102,7 +103,7 @@
     <div class="col-md-12">
         <h3 class="text-center">Clientes   <i class="fas fa-users"></i></h3>
         <div class="col-md-3 pb-2">
-            <a href="#AgregarPersonalModal"
+            <a href="#AgregarClienteModal"
                 data-toggle="modal" data-dismiss="modal">
                 <button type="button" class="btn btn-success">
                     Agregar Cliente
@@ -130,10 +131,10 @@
                         <td>{{i.telefono}}</td>
                         <td>
                             <button onclick="editarPersonal('{{i.id}}', '{{i.codigo}}', '{{i.nombre}}', '{{i.telefono}}',)" class="btn btn-dark-outline btn-sm" data-toggle="modal"
-                                href="#EditarPersonalModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
+                                href="#EditarClienteModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
                                     width="30"></button>
-                            <button onclick="eliminarPersonal('{{i.id}}')" class="btn btn-dark-outline btn-sm"
-                                data-toggle="modal" href="#EliminarPersonalModal"><img
+                            <button onclick="eliminarCliente('{{i.id}}')" class="btn btn-dark-outline btn-sm"
+                                data-toggle="modal" href="#EliminarClienteModal"><img
                                     src="{% static 'index/img/delete.png' %}" alt="Error" width="30"></button>
                         </td>
                     </tr>
@@ -147,11 +148,16 @@
 {% for message in messages %}
 <script>
     Swal.fire({
-        icon: 'error',
-        title: 'Error...',
+        icon: '{{message.tags}}',
+        title: 'Información',
         text: "{{message}}",
     })
 </script>
 {% endfor %}
 {% endif %}
+{% endblock %}
+
+
+{% block mainjs %}
+  <script type="text/javascript" charset="utf8" src="{% static 'index/js/main.js' %}?{{ time }}"></script>
 {% endblock %}
