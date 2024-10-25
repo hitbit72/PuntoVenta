@@ -8,3 +8,4 @@ start.bat
 static/
 !static/index/js/main.js
 !static/index/js/idiom.json
+!static/index/css/main.css
