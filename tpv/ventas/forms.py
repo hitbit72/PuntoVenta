@@ -39,10 +39,10 @@ class AddProductoForm(forms.ModelForm):
         model = Producto
         fields = ('codigo','descripcion','imagen','precio','cantidad','taxes')
         labels = {
-            'codigo': 'Código:',
-            'descripcion': 'Descripcion:',
-            'imagen': 'Imagen:',
-            'precio': 'Precio venta:',
-            'cantidad': 'Existencias:',
-            'taxes': 'Impuestos:',
+            'codigo': 'Código TPV',
+            'descripcion': 'Descripción',
+            'imagen': 'Imagen',
+            'precio': 'Precio venta',
+            'cantidad': 'Existencias',
+            'taxes': 'Impuestos',
         }
