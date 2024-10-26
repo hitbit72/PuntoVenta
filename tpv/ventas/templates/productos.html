@@ -10,15 +10,15 @@
 
 
 
-<div id="AgregarClienteModal" class="modal" style="overflow: scroll;">
+<div id="AgregarProductoModal" class="modal" style="overflow: scroll;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white">Nuevo cliente</h5>
-                <i class="fas fa-user-plus"></i></h3>
+                <h5 class="modal-title text-white">Nuevo producto</h5>
+                <i class="fas fa-boxes"></i></h3>
             </div>
             <div class="modal-body text-black">
-                <form method="POST" action="{% url 'AddCliente' %}" enctype="multipart/form-data">{% csrf_token %}
+                <form method="POST" action="{% url 'AddProducto' %}" enctype="multipart/form-data">{% csrf_token %}
                     {% for field in form_add %}
                     <p>{{field.label}} <br>
                         {{field|add_class:"form-control text-dark"}}</p>
@@ -43,16 +43,16 @@
     </div>
 </div>
 
-<div id="EditarClienteModal" class="modal">
+<div id="EditarProductoModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white">Editar Cliente</h5>
-                <i class="fas fa-user-edit"></i></h3>
+                <h5 class="modal-title text-white">Editar producto</h5>
+                <i class="fas fa-box-open"></i></h3>
             </div>
             <div class="modal-body text-black">
                 <form method="POST" action="{% url 'EditCliente' %}" enctype="multipart/form-data">{% csrf_token %}
-                    <input type="hidden" id="id_edit" name="id_edit">
+                    <input type="hidden" id="id_cliente_edit" name="id_cliente_edit">
                     {% for field in form_editar %}
                     <p> {{field.label}} <br>
                         {{field|add_class:"form-control"}}</p>
@@ -77,12 +77,12 @@
     </div>
 </div>
 
-<div id="EliminarClienteModal" class="modal">
+<div id="EliminarProductoModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white">Eliminar Cliente</h5>
-                <i class="fas fa-user-times"></i>
+                <h5 class="modal-title text-white">Eliminar producto</h5>
+                <i class="fas fa-box"></i>
             </div>
             <div class="modal-body text-black">
                 <p class="labelmodal">¿Estás seguro?</p>
@@ -104,12 +104,12 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3 class="text-center">Clientes   <i class="fas fa-users"></i></h3>
+        <h3 class="text-center">Productos   <i class="fas fa-boxes"></i></h3>
         <div class="col-md-3 pb-2">
-            <a href="#AgregarClienteModal"
+            <a href="#AgregarProductoModal"
                 data-toggle="modal" data-dismiss="modal">
                 <button type="button" class="btn btn-success">
-                    Agregar Cliente
+                    Agregar Producto
                     <i class="fas fa-plus-circle"></i>
                 </button>
             </a>
@@ -120,8 +120,10 @@
                     <tr>
                         <th># ID</th>
                         <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Telefono</th>
+                        <th>descripción</th>
+                        <th>Precio</th>
+                        <th>Stoc</th>
+                        <th>Imagen</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -130,14 +132,20 @@
                     <tr>
                         <td>{{i.id}}</td>
                         <td>{{i.codigo}}</td>
-                        <td>{{i.nombre}}</td>
-                        <td>{{i.telefono}}</td>
+                        <td>{{i.descripcion}}</td>
+                        <td>{{i.precio}}</td>
+                        <td>{{i.cantidad}}</td>
                         <td>
-                            <button onclick="editarCliente('{{i.id}}', '{{i.codigo}}', '{{i.nombre}}', '{{i.telefono}}', '{{i.dni}}')" class="btn btn-dark-outline btn-sm" data-toggle="modal"
-                                href="#EditarClienteModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
+                        {% if i.imagen %}
+                        <img src="{{i.imagen.url}}" alt="Error" width="100" height="100">
+                        {% endif %}
+                        </td>
+                        <td>
+                            <button onclick="editarProducto('{{i.id}}', '{{i.codigo}}', '{{i.descripcion}}', '{{i.imagen}}', '{{i.precio}}', '{{i.cantidad}}')" class="btn btn-dark-outline btn-sm" data-toggle="modal"
+                                href="#EditarProductoModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
                                     width="30"></button>
                             <button onclick="eliminarReg('{{i.id}}')" class="btn btn-dark-outline btn-sm"
-                                data-toggle="modal" href="#EliminarClienteModal"><img
+                                data-toggle="modal" href="#EliminarProductoModal"><img
                                     src="{% static 'index/img/delete.png' %}" alt="Error" width="30"></button>
                         </td>
                     </tr>

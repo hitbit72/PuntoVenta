@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Producto
-from .forms import AddClienteForm, EditClienteForm
+from .forms import AddClienteForm, EditClienteForm, AddProductoForm
 from django.contrib import messages
-#from pyexpat.errors import messages
 import time
 
 # Create your views here.
 # templates
+
 
 def ventas_view(request):
     num_ventas = 156
@@ -15,14 +15,14 @@ def ventas_view(request):
     }
     return render(request, 'ventas.html', context)
 
-# visualizacion principal clientes
+# visualizacion principal clientes ****************************
 def clientes_view(request):
-    clientes = Cliente.objects.all()
-    form_cliente = AddClienteForm()
+    registros = Cliente.objects.all()
+    form_add = AddClienteForm()
     form_editar = EditClienteForm()
     context = {
-        'clientes': clientes,
-        'form_cliente': form_cliente,
+        'registros': registros,
+        'form_add': form_add,
         'form_editar': form_editar,
         'time': time.time(),
     }
@@ -52,7 +52,7 @@ def edit_cliente_view(request):
     #print('Editar cliente')
     if request.POST:
         # id del registro a editar, en form añadir instance=cliente
-        cliente = Cliente.objects.get(pk=request.POST.get('id_cliente_edit'))
+        cliente = Cliente.objects.get(pk=request.POST.get('id_edit'))
         form = EditClienteForm(request.POST, request.FILES, instance=cliente)
         if form.is_valid:
             try:
@@ -60,6 +60,7 @@ def edit_cliente_view(request):
                 messages.success(request,'Formulario guardado correctamente')
             except:
                 messages.warning(request, 'No se guardo el formulario')
+                return redirect('Clientes')
         else:
             print(form.errors)
             messages.error(request, 'Formulario no válido')
@@ -70,7 +71,39 @@ def delete_cliente_view(request):
     if  request.POST:
         #idCliente = request.POST.get('id_cliente_eliminar')
         #print(f"Delete cliente ID: {idCliente}")
-        cliente = Cliente.objects.get(pk=request.POST.get('id_cliente_eliminar'))
+        cliente = Cliente.objects.get(pk=request.POST.get('id_delete'))
         cliente.delete()
         messages.success(request,'Cliente eliminado correctamente')
     return redirect('Clientes')
+
+
+# visualizacion principal productos ***************************************
+def productos_view(request):
+    registros = Producto.objects.all()
+    form_add = AddProductoForm()
+    form_editar = ''
+    context = {
+        'registros': registros,
+        'form_add': form_add,
+        'form_editar': form_editar,
+        'time': time.time(),
+    }
+    return render(request, 'productos.html', context)
+
+
+def add_producto_view(request):
+    if request.POST:
+        form = AddProductoForm(request.POST, request.FILES)
+        if form.is_valid:
+            try:
+                form.save(commit=True)
+                #messages.add_message(request, messages.INFO, 'Formulario guardado correctamente')
+                messages.success(request,'Formulario guardado correctamente')
+            except:
+                messages.warning(request, 'No se guardo el formulario')
+                return redirect('Productos')
+        else:
+            print('form no valido')
+            print(form.errors)
+            messages.error(request, 'Formulario no válido')
+    return redirect('Productos')

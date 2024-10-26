@@ -104,22 +104,19 @@ function editarPersonal(id, nombre, telefono, cargo) {
   document.getElementById("cargo_editar").value = cargo;
 }
 
-function editarCliente(id, codigo, nombre, telefono) {
-  document.getElementById("id_cliente_edit").value = id;
+function editarCliente(id, codigo, nombre, telefono, dni) {
+  document.getElementById("id_edit").value = id;
   document.getElementById("codigo_edit").value = codigo;
   document.getElementById("nombre_edit").value = nombre;
   document.getElementById("telefono_edit").value = telefono;
+  document.getElementById("dni_edit").value = dni;
 }
 
-function eliminarPersonal(id) {
-  document.getElementById("id_personal_eliminar").value = id;
-  //alert("EliminarPersonal: "+document.getElementById("id_personal_eliminar").value)
+
+function eliminarReg(id) {
+  document.getElementById("id_delete").value = id;
 }
 
-function eliminarCliente(id) {
-  document.getElementById("id_cliente_eliminar").value = id;
-  //alert("Eliminar cliente: "+document.getElementById("id_cliente_eliminar").value);
-}
 
 function borrarContent(){
   document.getElementById("search").value = "";
@@ -134,6 +131,14 @@ function activarEspera(){
   const btn = document.getElementById("btn");
   btn.innerHTML = 'Generando ... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
   btn.disabled = true;
+}
+
+function clearForm(formulario){
+  for(var i = 1; i < formulario.elements.length - 1 ; i++) {
+    if(formulario.elements[i].type == "text"){
+      formulario.elements[i].value = "";
+    }
+  }
 }
 
 $(document).ready(function () {

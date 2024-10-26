@@ -10,6 +10,7 @@ class Cliente(models.Model):
     codigo = models.CharField(max_length=50, unique=True, null=True, blank=True)
     nombre = models.CharField(max_length=200, unique=True, null=False, blank=False)
     telefono = models.CharField(max_length=20, unique=False, null=True, blank=True)
+    dni = models.CharField(max_length=15, unique=True, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 
@@ -26,8 +27,10 @@ class Producto(models.Model):
     codigo = models.CharField(max_length=255, unique=True, null=False, blank=False)
     descripcion = models.CharField(max_length=255, unique=True, null=False, blank=False)
     imagen = models.ImageField(upload_to='productos', null=True, blank=True)
-    costo = models.DecimalField(max_digits=15, decimal_places=2, null=False)
-    cantidad = models.DecimalField(max_digits=15, decimal_places=2, null=False)
+    costo = models.DecimalField(max_digits=15, decimal_places=2, null=False, default=0, blank=True)
+    cantidad = models.DecimalField(max_digits=15, decimal_places=2, null=False, default=0, blank=True)
+    precio = models.DecimalField(max_digits=15, decimal_places=2, null=False, default=0, blank=True)
+    taxes = models.DecimalField(max_digits=15, decimal_places=2, null=False, default=0, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 
