@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Producto
-from .forms import AddClienteForm, EditClienteForm, AddProductoForm
+from .forms import AddClienteForm, EditClienteForm, AddProductoForm, EditProductoForm
 from django.contrib import messages
 import time
 
@@ -73,7 +73,7 @@ def delete_cliente_view(request):
         #print(f"Delete cliente ID: {idCliente}")
         cliente = Cliente.objects.get(pk=request.POST.get('id_delete'))
         cliente.delete()
-        messages.success(request,'Cliente eliminado correctamente')
+        messages.success(request,'Registro eliminado correctamente')
     return redirect('Clientes')
 
 
@@ -81,7 +81,7 @@ def delete_cliente_view(request):
 def productos_view(request):
     registros = Producto.objects.all()
     form_add = AddProductoForm()
-    form_editar = ''
+    form_editar = EditProductoForm()
     context = {
         'registros': registros,
         'form_add': form_add,
@@ -106,4 +106,31 @@ def add_producto_view(request):
             print('form no valido')
             print(form.errors)
             messages.error(request, 'Formulario no válido')
+    return redirect('Productos')
+
+
+def edit_producto_view(request):
+    if request.POST:
+        # id del registro a editar, en form añadir instance=cliente
+        producto = Producto.objects.get(pk=request.POST.get('id_edit'))
+        form = EditProductoForm(request.POST, request.FILES, instance=producto)
+        if form.is_valid:
+            try:
+                form.save(commit=True)
+                messages.success(request,'Formulario guardado correctamente')
+            except:
+                messages.warning(request, 'No se guardo el formulario')
+                return redirect('Productos')
+        else:
+            print(form.errors)
+            messages.error(request, 'Formulario no válido')
+    return redirect('Productos')
+
+def delete_producto_view(request):
+    if  request.POST:
+        #idCliente = request.POST.get('id_cliente_eliminar')
+        #print(f"Delete cliente ID: {idCliente}")
+        cliente = Cliente.objects.get(pk=request.POST.get('id_delete'))
+        cliente.delete()
+        messages.success(request,'Registro eliminado correctamente')
     return redirect('Productos')
