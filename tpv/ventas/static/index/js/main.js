@@ -100,8 +100,14 @@ function editarProducto(id, codigo, descripcion, precio, cantidad, taxes, imagen
   document.getElementById("precio_edit").value = precio;
   document.getElementById("cantidad_edit").value = cantidad;
   document.getElementById("taxes_edit").value = taxes;
-  document.getElementById("id_imagen").value = imagen;
-  alert(imagen)
+  document.getElementById("old_imagen").value = imagen;
+  alert(imagen);
+}
+
+function image_update(img,id) {
+  if (img != ""){
+    document.getElementById(id).value = img;
+  }
 }
 
 function eliminarProducto(id) {

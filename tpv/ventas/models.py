@@ -27,6 +27,7 @@ class Producto(models.Model):
     codigo = models.CharField(max_length=255, unique=True, null=False, blank=False)
     descripcion = models.CharField(max_length=255, unique=True, null=False, blank=False)
     imagen = models.ImageField(upload_to='productos', null=True, blank=True)
+    #imagen = models.CharField(max_length=255, unique=False, null=True, blank=True)
     costo = models.DecimalField(max_digits=15, decimal_places=2, null=False, default=0, blank=True)
     cantidad = models.DecimalField(max_digits=15, decimal_places=2, null=False, default=0, blank=True)
     precio = models.DecimalField(max_digits=15, decimal_places=2, null=False, default=0, blank=True)
@@ -41,4 +42,3 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.descripcion
-    

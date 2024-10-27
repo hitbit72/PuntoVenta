@@ -53,13 +53,16 @@
             <div class="modal-body text-black">
                 <form method="POST" action="{% url 'EditProducto' %}" enctype="multipart/form-data">{% csrf_token %}
                     <input type="hidden" id="id_edit" name="id_edit">
-                    <input type="hidden" id="id_imagen" name="id_imagen">
+                    <input type="hidden" id="old_imagen" name="old_imagen">
                     {% for field in form_editar %}
                     <p> {{field.label}} <br>
-                        {{field|add_class:"form-control"}}</p>
+                        {{field|add_class:"form-control"}}
+                    </p>
+                    
                     {% for error in field.errors %}
                     <p class="alarma">{{error}}</p>
                     {% endfor %}
+
                     {% endfor %}
                     {% for error in form.non_field_errors %}
                     <p class="alarma">{{error}}</p>
@@ -142,9 +145,9 @@
                         {% endif %}
                         </td>
                         <td>
-                            <button onclick="editarProducto('{{i.id}}', '{{i.codigo}}', '{{i.descripcion}}', '{{i.precio}}', '{{i.cantidad}}', '{{i.taxes}}', '{{i.imagen.url}}')" class="btn btn-dark-outline btn-sm" data-toggle="modal"
-                                href="#EditarProductoModal"><img src="{% static 'index/img/editar.png' %}" alt="Error"
-                                    width="30"></button>
+                            <button onclick="editarProducto('{{i.id}}', '{{i.codigo}}', '{{i.descripcion}}', '{{i.precio}}', '{{i.cantidad}}', '{{i.taxes}}','{{i.imagen.name}}')" 
+                             class="btn btn-dark-outline btn-sm" data-toggle="modal" href="#EditarProductoModal"><img src="{% static 'index/img/editar.png' %}" alt="Error" width="30"></button>
+                            
                             <button onclick="eliminarReg('{{i.id}}')" class="btn btn-dark-outline btn-sm"
                                 data-toggle="modal" href="#EliminarProductoModal"><img
                                     src="{% static 'index/img/delete.png' %}" alt="Error" width="30"></button>

@@ -1,7 +1,7 @@
 # formularios basados en nuestros modelos
 from django import forms
 from ventas.models import Cliente, Producto
-
+from django.forms.widgets import FileInput
 
 # Formularios clientes **********************************************
 class AddClienteForm(forms.ModelForm):
@@ -88,10 +88,11 @@ class EditProductFrom(forms.ModelForm):
 
 
 class EditProductoForm(forms.ModelForm):
+
     class Meta:
         model = Producto
         #fields = '__all__'
-        fields = ['codigo','descripcion','imagen','precio','cantidad','taxes']
+        fields = ['codigo','descripcion', 'imagen', 'precio','cantidad','taxes']
         labels = {
             'codigo': 'Código TPV',
             'descripcion': 'Descripción',
@@ -104,6 +105,7 @@ class EditProductoForm(forms.ModelForm):
         widgets = {
             'codigo': forms.TextInput(attrs={'id': 'codigo_edit', 'type': 'text', 'autofocus': True}),
             'descripcion': forms.TextInput(attrs={'id': 'descripcion_edit', 'type': 'text'}),
+            'imagen': FileInput(),
             'precio': forms.TextInput(attrs={'id': 'precio_edit', 'placeholder': '000.00'}),
             'cantidad': forms.TextInput(attrs={'id': 'cantidad_edit', 'placeholder': '000.00' }),
             'taxes': forms.TextInput(attrs={'id': 'taxes_edit', 'placeholder': '000.00'}),
