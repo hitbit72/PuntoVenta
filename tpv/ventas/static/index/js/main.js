@@ -93,11 +93,11 @@ function eliminarPreventivo(id) {
   document.getElementById("id_preventivo_eliminar").value = id;
 }
 
-function editarProducto(id, codigo, descripcion, imagen, precio, cantidad, taxes) {
+function editarProducto(id, codigo, descripcion, precio, cantidad, taxes, imagen) {
   document.getElementById("id_edit").value = id;
   document.getElementById("codigo_edit").value = codigo;
   document.getElementById("descripcion_edit").value = descripcion;
-  document.getElementById("imagen_edi").value = imagen;
+  //document.getElementById("imagen_edi").value = imagen;
   document.getElementById("precio_edit").value = precio;
   document.getElementById("cantidad_edit").value = cantidad;
   document.getElementById("taxes_edit").value = taxes;

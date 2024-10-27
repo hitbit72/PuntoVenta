@@ -32,7 +32,7 @@ def add_cliente_view(request):
     #print('Guardar cliente')
     if request.POST:
         form = AddClienteForm(request.POST, request.FILES)
-        if form.is_valid:
+        if form.is_valid():
             try:
                 form.save(commit=True)
                 #messages.add_message(request, messages.INFO, 'Formulario guardado correctamente')
@@ -54,7 +54,7 @@ def edit_cliente_view(request):
         # id del registro a editar, en form añadir instance=cliente
         cliente = Cliente.objects.get(pk=request.POST.get('id_edit'))
         form = EditClienteForm(request.POST, request.FILES, instance=cliente)
-        if form.is_valid:
+        if form.is_valid():
             try:
                 form.save(commit=True)
                 messages.success(request,'Formulario guardado correctamente')
@@ -94,7 +94,7 @@ def productos_view(request):
 def add_producto_view(request):
     if request.POST:
         form = AddProductoForm(request.POST, request.FILES)
-        if form.is_valid:
+        if form.is_valid():
             try:
                 form.save(commit=True)
                 #messages.add_message(request, messages.INFO, 'Formulario guardado correctamente')
@@ -114,16 +114,31 @@ def edit_producto_view(request):
         # id del registro a editar, en form añadir instance=cliente
         producto = Producto.objects.get(pk=request.POST.get('id_edit'))
         form = EditProductoForm(request.POST, request.FILES, instance=producto)
-        if form.is_valid:
-            try:
-                form.save(commit=True)
+        form.instance.pk = producto.pk #Agregue esta línea para asegurarme de que la identificación permanezca sin cambios
+
+        if form.is_valid():
+            #try:
+                print(f'pk: {form.instance.pk}')
+                if 'imagen' in request.FILES:
+                    producto.imagen = request.FILES['imagen']
+                    print(producto.imagen)
+                else:
+                    producto.imagen = 'productos/default.bmp'
+                    print(producto.imagen)
+
+                #print(f'Formulario: Precio:{request.FILES['precio_edit']} Cantidad:{request.FILES['cantidad_edit']}')
+                print('ERRORS: ')
+                print(form.errors)
+                form.save()
                 messages.success(request,'Formulario guardado correctamente')
+                """
             except:
                 messages.warning(request, 'No se guardo el formulario')
                 return redirect('Productos')
+                """
         else:
-            print(form.errors)
-            messages.error(request, 'Formulario no válido')
+            print("El form no es valido. Error: ", form.errors)
+            messages.error(request, 'Formulario no válido', form.errors)
     return redirect('Productos')
 
 def delete_producto_view(request):
