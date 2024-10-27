@@ -115,6 +115,7 @@ def edit_producto_view(request):
         producto = Producto.objects.get(pk=request.POST.get('id_edit'))
         form = EditProductoForm(request.POST, request.FILES, instance=producto)
         form.instance.pk = producto.pk #Agregue esta línea para asegurarme de que la identificación permanezca sin cambios
+        img = request.POST.get('id_imagen')
 
         if form.is_valid():
             #try:
@@ -123,7 +124,7 @@ def edit_producto_view(request):
                     producto.imagen = request.FILES['imagen']
                     print(producto.imagen)
                 else:
-                    producto.imagen = 'productos/default.bmp'
+                    producto.imagen = img
                     print(producto.imagen)
 
                 #print(f'Formulario: Precio:{request.FILES['precio_edit']} Cantidad:{request.FILES['cantidad_edit']}')

@@ -97,10 +97,11 @@ function editarProducto(id, codigo, descripcion, precio, cantidad, taxes, imagen
   document.getElementById("id_edit").value = id;
   document.getElementById("codigo_edit").value = codigo;
   document.getElementById("descripcion_edit").value = descripcion;
-  //document.getElementById("imagen_edi").value = imagen;
   document.getElementById("precio_edit").value = precio;
   document.getElementById("cantidad_edit").value = cantidad;
   document.getElementById("taxes_edit").value = taxes;
+  document.getElementById("id_imagen").value = imagen;
+  alert(imagen)
 }
 
 function eliminarProducto(id) {

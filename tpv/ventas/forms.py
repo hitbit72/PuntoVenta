@@ -52,8 +52,42 @@ class AddProductoForm(forms.ModelForm):
             'precio': {'required': 'El campo Precio es obligatorio'},
         }
 
-class EditProductoForm(forms.ModelForm):
+class EditProductFrom(forms.ModelForm):
+    """
+        clase que contiene los campos del formulario
+        @autor Jorge Tejada
+    """
 
+    # codigo
+    codigo = forms.CharField(
+        label ='Codigo',
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                'id': 'codigo_edit',
+                'title': 'Codigo del producto',
+                'data-toggle': 'tooltip',
+                'type': 'text',
+            }
+        )
+    )
+
+    # Descripcion
+    descripcion = forms.CharField(
+        label ='Descripcion',
+        max_length=255,
+        widget=forms.TextInput(
+            attrs={
+                'id': 'descripcion_edit',
+                'title': 'Descripcion del producto',
+                'data-toggle': 'tooltip',
+                'type': 'text',
+            }
+        )
+    )
+
+
+class EditProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         #fields = '__all__'
@@ -66,19 +100,13 @@ class EditProductoForm(forms.ModelForm):
             'cantidad': 'Existencias',
             'taxes': 'Impuestos',
         }
-        
-        """
-        precio_edit = forms.DecimalField(max_digits=11,decimal_places=2)
-        cantidad = forms.DecimalField(max_digits=11,decimal_places=2)
-        taxes = forms.DecimalField(max_digits=11,decimal_places=2)
-        """
 
         widgets = {
             'codigo': forms.TextInput(attrs={'id': 'codigo_edit', 'type': 'text', 'autofocus': True}),
             'descripcion': forms.TextInput(attrs={'id': 'descripcion_edit', 'type': 'text'}),
-            'precio': forms.TextInput(attrs={'id': 'precio_edit'}),
-            'cantidad': forms.TextInput(attrs={'id': 'cantidad_edit' }),
-            'taxes': forms.TextInput(attrs={'id': 'taxes_edit'}),
+            'precio': forms.TextInput(attrs={'id': 'precio_edit', 'placeholder': '000.00'}),
+            'cantidad': forms.TextInput(attrs={'id': 'cantidad_edit', 'placeholder': '000.00' }),
+            'taxes': forms.TextInput(attrs={'id': 'taxes_edit', 'placeholder': '000.00'}),
         }
         error_messages = {
             'codigo': {'required': 'El campo Código es obligatorio'},
